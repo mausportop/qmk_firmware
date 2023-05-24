@@ -195,11 +195,10 @@ def info(cli):
     else:
         kb_info_json = info_json(cli.config.info.keyboard)
 
-    if not cli.args.api:
-        kb_info_json = _strip_api_content(kb_info_json)
-
     # Output in the requested format
     if cli.args.format == 'json':
+        if not cli.args.api:
+            kb_info_json = _strip_api_content(kb_info_json)
         print(json.dumps(kb_info_json, cls=InfoJSONEncoder, sort_keys=True))
         return True
     elif cli.args.format == 'text':
